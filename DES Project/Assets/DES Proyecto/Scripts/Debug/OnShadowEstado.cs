@@ -2,16 +2,14 @@
 //																				\\
 // OnShadowEstado.cs (07/04/2018)												\\
 // Autor: Antonio Mateo (.\Moon Antonio) 	antoniomt.moon@gmail.com			\\
-// Descripcion:		Controlador de FPS											\\
+// Descripcion:		Controlador del sprite del debug							\\
 // Fecha Mod:		07/04/2018													\\
 // Ultima Mod:		Version Inicial												\\
 //******************************************************************************\\
 
-
 #region Librerias
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 #endregion
 
 namespace MoonAntonio.Debug
