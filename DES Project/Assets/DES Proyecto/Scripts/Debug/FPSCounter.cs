@@ -15,9 +15,6 @@ using UnityEngine.UI;
 
 namespace MoonAntonio.Debug
 {
-	/// <summary>
-	/// <para></para>
-	/// </summary>
 	[RequireComponent(typeof(Text))]
 	public class FPSCounter : MonoBehaviour 
 	{
@@ -28,6 +25,28 @@ namespace MoonAntonio.Debug
 		private int m_CurrentFps;
 		const string display = "{0} FPS";
 		private Text m_Text;
+		#endregion
+
+		#region Inicializadores
+		private void Start()
+		{
+			m_FpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
+			m_Text = GetComponent<Text>();
+		}
+		#endregion
+
+		#region Actualizadores
+		private void Update()
+		{
+			m_FpsAccumulator++;
+			if (Time.realtimeSinceStartup > m_FpsNextPeriod)
+			{
+				m_CurrentFps = (int)(m_FpsAccumulator / fpsMeasurePeriod);
+				m_FpsAccumulator = 0;
+				m_FpsNextPeriod += fpsMeasurePeriod;
+				m_Text.text = string.Format(display, m_CurrentFps);
+			}
+		}
 		#endregion
 	}
 }
