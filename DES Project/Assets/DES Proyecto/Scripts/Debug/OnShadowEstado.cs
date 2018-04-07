@@ -29,5 +29,31 @@ namespace MoonAntonio.Debug
 		[SerializeField] private bool onShadow = false;
 		#endregion
 
+		#region Inicializadores
+		private void Awake()
+		{
+			if (icono == null) icono = GetComponent<Image>();
+
+			Init(onShadow);
+		}
+		#endregion
+
+		#region Metodos
+		public void SetOnShadow(bool value)
+		{
+			if (spriteSinSombra == null || spriteEnSombra == null) return;
+
+			icono.sprite = (value) ? spriteEnSombra : spriteSinSombra;
+
+			onShadow = value;
+		}
+
+		private void Init(bool value)
+		{
+			if (spriteSinSombra == null || spriteEnSombra == null) return;
+
+			icono.sprite = (value) ? spriteEnSombra : spriteSinSombra;
+		}
+		#endregion
 	}
 }
