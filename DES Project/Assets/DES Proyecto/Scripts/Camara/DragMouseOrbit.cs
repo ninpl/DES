@@ -18,31 +18,30 @@ namespace MoonAntonio
 	{
 		#region Variables Publicas
 		public Transform target;
-		public float distance = 5.0f;
-		public float xSpeed = 120.0f;
-		public float ySpeed = 120.0f;
-		public float zSpeed = 5.0f;
+		public float distancia = 5.0f;
+		public float xVel = 120.0f;
+		public float yVel = 120.0f;
 		public float yMinLimit = -20f;
 		public float yMaxLimit = 80f;
-		public float distanceMin = .5f;
-		public float distanceMax = 15f;
+		public float distanciaMin = .5f;
+		public float distanciaMax = 15f;
 		public float smoothTime = 2f;
 		#endregion
 
 		#region Variables Privadas
 		private bool isActive = true;
-		private float rotationYAxis = 0.0f;
-		private float rotationXAxis = 0.0f;
-		private float velocityX = 0.0f;
-		private float velocityY = 0.0f;
+		private float rotacionYAxis = 0.0f;
+		private float rotacionXAxis = 0.0f;
+		private float velX = 0.0f;
+		private float velY = 0.0f;
 		#endregion
 
 		#region Inicializacion
 		private void Start()
 		{
-			Vector3 angles = transform.eulerAngles;
-			rotationYAxis = angles.y;
-			rotationXAxis = angles.x;
+			Vector3 angulos = transform.eulerAngles;
+			rotacionYAxis = angulos.y;
+			rotacionXAxis = angulos.x;
 
 			if (GetComponent<Rigidbody>()) GetComponent<Rigidbody>().freezeRotation = true;
 		}
@@ -55,36 +54,35 @@ namespace MoonAntonio
 			{
 				if (Input.GetMouseButton(0) && isActive)
 				{
-					velocityX += xSpeed * Input.GetAxis("Mouse X") * distance * 0.02f;
-					velocityY += ySpeed * Input.GetAxis("Mouse Y") * 0.02f;
+					velX += xVel * Input.GetAxis("Mouse X") * distancia * 0.02f;
+					velY += yVel * Input.GetAxis("Mouse Y") * 0.02f;
 				}
-				rotationYAxis += velocityX;
-				rotationXAxis -= velocityY;
-				rotationXAxis = ClampAngle(rotationXAxis, yMinLimit, yMaxLimit);
-				Quaternion toRotation = Quaternion.Euler(rotationXAxis, rotationYAxis, 0);
-				Quaternion rotation = toRotation;
+				rotacionYAxis += velX;
+				rotacionXAxis -= velY;
+				rotacionXAxis = ClampAngle(rotacionXAxis, yMinLimit, yMaxLimit);
+				Quaternion toRotacion = Quaternion.Euler(rotacionXAxis, rotacionYAxis, 0);
+				Quaternion rotacion = toRotacion;
 
-				distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distanceMax);
-				Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-				Vector3 position = rotation * negDistance + target.position;
+				distancia = Mathf.Clamp(distancia - Input.GetAxis("Mouse ScrollWheel") * 5, distanciaMin, distanciaMax);
+				Vector3 negDistancia = new Vector3(0.0f, 0.0f, -distancia);
+				Vector3 posicion = rotacion * negDistancia + target.position;
 
-				transform.rotation = rotation;
-				transform.position = position;
+				transform.rotation = rotacion;
+				transform.position = posicion;
 
-				velocityX = Mathf.Lerp(velocityX, 0, Time.deltaTime * smoothTime);
-				velocityY = Mathf.Lerp(velocityY, 0, Time.deltaTime * smoothTime);
+				velX = Mathf.Lerp(velX, 0, Time.deltaTime * smoothTime);
+				velY = Mathf.Lerp(velY, 0, Time.deltaTime * smoothTime);
 			}
 		}
 		#endregion
 
 		#region Metodos y Funciones
-		public static float ClampAngle(float angle, float min, float max)
+		public static float ClampAngle(float angulo, float min, float max)
 		{
-			if (angle < -360F)
-				angle += 360F;
-			if (angle > 360F)
-				angle -= 360F;
-			return Mathf.Clamp(angle, min, max);
+			if (angulo < -360F) angulo += 360F;
+			if (angulo > 360F) angulo -= 360F;
+
+			return Mathf.Clamp(angulo, min, max);
 		}
 
 		public void SetActive(bool value)

@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace MoonAntonio
 {
-	public class CustomFixedUpdate : MonoBehaviour 
+	public class CustomFixedUpdate
 	{
 		#region Variables Privadas
 		private float fixedDeltaTime;
