@@ -1,14 +1,13 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
-// FPSCounter.cs (00/00/0000)													\\
+// FPSCounter.cs (07/04/2018)													\\
 // Autor: Antonio Mateo (.\Moon Antonio) 	antoniomt.moon@gmail.com			\\
-// Descripcion:																	\\
-// Fecha Mod:		00/00/0000													\\
-// Ultima Mod:																	\\
+// Descripcion:		Controlador de FPS											\\
+// Fecha Mod:		07/04/2018													\\
+// Ultima Mod:		Version Inicial												\\
 //******************************************************************************\\
 
 #region Librerias
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
