@@ -36,5 +36,61 @@ namespace MoonAntonio
 		private float velocityX = 0.0f;
 		private float velocityY = 0.0f;
 		#endregion
+
+		#region Inicializacion
+		private void Start()
+		{
+			Vector3 angles = transform.eulerAngles;
+			rotationYAxis = angles.y;
+			rotationXAxis = angles.x;
+
+			if (GetComponent<Rigidbody>()) GetComponent<Rigidbody>().freezeRotation = true;
+		}
+		#endregion
+
+		#region Actualizaciones
+		private void LateUpdate()
+		{
+			if (target)
+			{
+				if (Input.GetMouseButton(0) && isActive)
+				{
+					velocityX += xSpeed * Input.GetAxis("Mouse X") * distance * 0.02f;
+					velocityY += ySpeed * Input.GetAxis("Mouse Y") * 0.02f;
+				}
+				rotationYAxis += velocityX;
+				rotationXAxis -= velocityY;
+				rotationXAxis = ClampAngle(rotationXAxis, yMinLimit, yMaxLimit);
+				Quaternion toRotation = Quaternion.Euler(rotationXAxis, rotationYAxis, 0);
+				Quaternion rotation = toRotation;
+
+				distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distanceMax);
+				Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+				Vector3 position = rotation * negDistance + target.position;
+
+				transform.rotation = rotation;
+				transform.position = position;
+
+				velocityX = Mathf.Lerp(velocityX, 0, Time.deltaTime * smoothTime);
+				velocityY = Mathf.Lerp(velocityY, 0, Time.deltaTime * smoothTime);
+			}
+		}
+		#endregion
+
+		#region Metodos y Funciones
+		public static float ClampAngle(float angle, float min, float max)
+		{
+			if (angle < -360F)
+				angle += 360F;
+			if (angle > 360F)
+				angle -= 360F;
+			return Mathf.Clamp(angle, min, max);
+		}
+
+		public void SetActive(bool value)
+		{
+			isActive = value;
+		}
+		#endregion
 	}
 }
