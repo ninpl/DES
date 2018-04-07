@@ -17,9 +17,9 @@ namespace MoonAntonio
 	{
 		#region Variables Privadas
 		private float fixedDeltaTime;
-		private float referenceTime = 0;
-		private float fixedTime = 0;
-		private float maxAllowedTimestep = 0.3f;
+		private float referenciaTiempo = 0;
+		private float fixedTiempo = 0;
+		private float tiempoMax = 0.3f;
 		private System.Action fixedUpdate;
 		private System.Diagnostics.Stopwatch timeout = new System.Diagnostics.Stopwatch();
 		#endregion
@@ -30,18 +30,18 @@ namespace MoonAntonio
 			get { return fixedDeltaTime; }
 			set { fixedDeltaTime = value; }
 		}
-		public float MaxAllowedTimestep
+		public float TiempoMax
 		{
-			get { return maxAllowedTimestep; }
-			set { maxAllowedTimestep = value; }
+			get { return tiempoMax; }
+			set { tiempoMax = value; }
 		}
-		public float ReferenceTime
+		public float ReferenciaTiempo
 		{
-			get { return referenceTime; }
+			get { return referenciaTiempo; }
 		}
-		public float FixedTime
+		public float FixedTiempo
 		{
-			get { return fixedTime; }
+			get { return fixedTiempo; }
 		}
 		#endregion
 
@@ -57,12 +57,12 @@ namespace MoonAntonio
 			timeout.Reset();
 			timeout.Start();
 
-			referenceTime += aDeltaTime;
-			while (fixedTime < referenceTime)
+			referenciaTiempo += aDeltaTime;
+			while (fixedTiempo < referenciaTiempo)
 			{
-				fixedTime += fixedDeltaTime;
+				fixedTiempo += fixedDeltaTime;
 				if (fixedUpdate != null) fixedUpdate();
-				if ((timeout.ElapsedMilliseconds / 1000.0f) > maxAllowedTimestep) return false;
+				if ((timeout.ElapsedMilliseconds / 1000.0f) > tiempoMax) return false;
 			}
 			return true;
 		}
