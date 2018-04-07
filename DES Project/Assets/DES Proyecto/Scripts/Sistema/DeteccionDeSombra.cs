@@ -19,7 +19,39 @@ namespace MoonAntonio
 {
 	public class DeteccionDeSombra : MonoBehaviour 
 	{
+		#region Variables
+		[SerializeField]
+		private bool _isAuto = true;
+		[SerializeField]
+		private List<Light> _lights;
+		[SerializeField]
+		public int _minimumNbTargetOnShadow = 1;
+		public MODODETECCION _detectMode = MODODETECCION.ALL;
+		[SerializeField]
+		public float _raycastinRate = 60f;
+		private CustomFixedUpdate _CustomFixedUpdate;
 
+		[SerializeField]
+		private List<ShadowTarget> _targets;
+		[SerializeField]
+		private LayerMask _layers;
+
+		[SerializeField]
+		private UnityEventBool _onChangeState;
+		[SerializeField]
+		private UnityEvent _onEnterShadow;
+		[SerializeField]
+		private UnityEvent _onExitShadow;
+		[SerializeField]
+		private UnityEvent _onShadow;
+		[SerializeField]
+		private UnityEvent _outShadow;
+
+		[HideInInspector]
+		public ShadowEstado IsOnShadow_state = ShadowEstado.NODEFINIDO;
+		[HideInInspector]
+		public ShadowEstado Last_IsOnShadow_state = ShadowEstado.NODEFINIDO;
+		#endregion
 	}
 
 	#region Enums
