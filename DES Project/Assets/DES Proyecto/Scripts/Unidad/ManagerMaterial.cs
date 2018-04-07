@@ -1,15 +1,13 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
-// ManagerMaterial.cs (00/00/0000)													\\
+// ManagerMaterial.cs (07/04/2018)												\\
 // Autor: Antonio Mateo (.\Moon Antonio) 	antoniomt.moon@gmail.com			\\
-// Descripcion:																	\\
-// Fecha Mod:		00/00/0000													\\
-// Ultima Mod:																	\\
+// Descripcion:		Controlador del cambio de material							\\
+// Fecha Mod:		07/04/2018													\\
+// Ultima Mod:		Version Inicial												\\
 //******************************************************************************\\
 
 #region Librerias
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
