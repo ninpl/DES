@@ -46,7 +46,7 @@ namespace MoonAntonio
 
 		public void SetMaterial(int id)
 		{
-			if (materiales == null || meshRenderer == null || materiales.Length == 0) return;
+			if (materiales == null || materiales.Length == 0) return;
 
 			id = (id < 0) ? materiales.Length - 1 : (id > materiales.Length - 1) ? 0 : id;
 

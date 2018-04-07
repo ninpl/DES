@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 #endregion
 
-namespace MoonAntonio.Debug
+namespace MoonAntonio
 {
 	[RequireComponent(typeof(Image))]
 	public class OnShadowEstado : MonoBehaviour 

@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine;
 #endregion
 
-namespace MoonAntonio.Extensiones
+namespace MoonAntonio
 {
 	public static class GUInspectorEx
 	{
