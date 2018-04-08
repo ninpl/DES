@@ -18,32 +18,32 @@ namespace MoonAntonio
 	public class FPSCounter : MonoBehaviour 
 	{
 		#region Variables Privadas
-		const float fpsMeasurePeriod = 0.5f;
-		private int m_FpsAccumulator = 0;
-		private float m_FpsNextPeriod = 0;
-		private int m_CurrentFps;
-		const string display = "{0} FPS";
-		private Text m_Text;
+		const float medidaFPS = 0.5f;
+		private int acumuladorFPS = 0;
+		private float siguPeriodoFPS = 0;
+		private int actualFPS;
+		const string formato = "{0} FPS";
+		private Text text;
 		#endregion
 
 		#region Inicializadores
 		private void Start()
 		{
-			m_FpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
-			m_Text = GetComponent<Text>();
+			siguPeriodoFPS = Time.realtimeSinceStartup + medidaFPS;
+			text = GetComponent<Text>();
 		}
 		#endregion
 
 		#region Actualizadores
 		private void Update()
 		{
-			m_FpsAccumulator++;
-			if (Time.realtimeSinceStartup > m_FpsNextPeriod)
+			acumuladorFPS++;
+			if (Time.realtimeSinceStartup > siguPeriodoFPS)
 			{
-				m_CurrentFps = (int)(m_FpsAccumulator / fpsMeasurePeriod);
-				m_FpsAccumulator = 0;
-				m_FpsNextPeriod += fpsMeasurePeriod;
-				m_Text.text = string.Format(display, m_CurrentFps);
+				actualFPS = (int)(acumuladorFPS / medidaFPS);
+				acumuladorFPS = 0;
+				siguPeriodoFPS += medidaFPS;
+				text.text = string.Format(formato, actualFPS);
 			}
 		}
 		#endregion

@@ -18,50 +18,52 @@ namespace MoonAntonio
 	public class EditorTools : MonoBehaviour 
 	{
 		#region Variables
-		static List<string> layers;
-		static string[] layerNames;
+		private static List<string> layers;
+		private static string[] nombresLayer;
 		#endregion
 
 		#region Funcionalidades
-		public static LayerMask LayerMaskField(string label, LayerMask selected)
+		public static LayerMask LayerMaskField(string nombre, LayerMask seleccion)
 		{
-
 			if (layers == null)
 			{
 				layers = new List<string>();
-				layerNames = new string[4];
+				nombresLayer = new string[4];
 			}
 			else
 			{
 				layers.Clear();
 			}
 
-			int emptyLayers = 0;
+		
+			int layersVacias = 0;
+
 			for (int i = 0; i < 32; i++)
 			{
-				string layerName = LayerMask.LayerToName(i);
+				string nomLayer = LayerMask.LayerToName(i);
 
-				if (layerName != "")
+				if (nomLayer != "")
 				{
 
-					for (; emptyLayers > 0; emptyLayers--) layers.Add("Layer " + (i - emptyLayers));
-					layers.Add(layerName);
+					for (; layersVacias > 0; layersVacias--) layers.Add("Layer " + (i - layersVacias));
+					layers.Add(nomLayer);
 				}
 				else
 				{
-					emptyLayers++;
+					layersVacias++;
 				}
 			}
 
-			if (layerNames.Length != layers.Count)
+			if (nombresLayer.Length != layers.Count)
 			{
-				layerNames = new string[layers.Count];
+				nombresLayer = new string[layers.Count];
 			}
-			for (int i = 0; i < layerNames.Length; i++) layerNames[i] = layers[i];
 
-			selected.value = EditorGUILayout.MaskField(label, selected.value, layerNames);
+			for (int i = 0; i < nombresLayer.Length; i++) nombresLayer[i] = layers[i];
 
-			return selected;
+			seleccion.value = EditorGUILayout.MaskField(nombre, seleccion.value, nombresLayer);
+
+			return seleccion;
 		}
 		#endregion
 	}

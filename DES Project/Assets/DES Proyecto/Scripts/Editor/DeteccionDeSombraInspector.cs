@@ -1,10 +1,10 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
-// DeteccionDeSombraInspector.cs (00/00/0000)									\\
+// DeteccionDeSombraInspector.cs (08/04/2018)									\\
 // Autor: Antonio Mateo (.\Moon Antonio) 	antoniomt.moon@gmail.com			\\
-// Descripcion:																	\\
-// Fecha Mod:		00/00/0000													\\
-// Ultima Mod:																	\\
+// Descripcion:		Inspector de DeteccionDeSombra								\\
+// Fecha Mod:		08/04/2018													\\
+// Ultima Mod:		Version Inicial												\\
 //******************************************************************************\\
 
 #region Librerias
@@ -44,17 +44,17 @@ namespace MoonAntonio
 
 			//=======================================================================================================
 			//-----------------------------------------------//HEADER\\----------------------------------------------
-			GUInspectorEx.DrawHeader(bgRect, "Shadow Detect");
+			GUInspectorEx.DrawHeader(bgRect, "Deteccion En Sombras");
 
 			//=======================================================================================================
-			//---------------------------------------------//OPTIONS GENERAL\\-------------------------------------------
+			//---------------------------------------------//OPCIONES GENERALES\\-------------------------------------------
 			GUInspectorEx.OnCollapsibleVisible generalCollapsibleVisible = delegate ()
 			{
-				sd.detectMode = (MODODETECCION)EditorGUILayout.EnumPopup("Shadow Detect Mode:", sd.detectMode);
-				sd.raycastinRate = EditorGUILayout.Slider(new GUIContent("Raycasting Rate:", "Rate to test if your targets are in or out a shadow"), sd.raycastinRate, 10.0f, 60.0f);
-				EditorGUILayout.PropertyField(layers, new GUIContent("Layers:", "Layer that is used to selectively ignore Colliders when casting a ray"), true);
+				sd.detectMode = (MODODETECCION)EditorGUILayout.EnumPopup("Modo de deteccion:", sd.detectMode);
+				sd.raycastinRate = EditorGUILayout.Slider(new GUIContent("Raycasting Rate:", "Puntuacion para probar si tus objetivos estan dentro o fuera de una sombra."), sd.raycastinRate, 10.0f, 60.0f);
+				EditorGUILayout.PropertyField(layers, new GUIContent("Layers:", "Layer que se usa para ignorar selectivamente Colliders cuando se lanza un rayo."), true);
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(new GUIContent("Automatic lights research?", "Defined if you want to research all lights of the scene or if you set them"));
+				GUILayout.Label(new GUIContent("¿Investigacion automatica de luces?", "Definido si quieres investigar todas las luces de la escena o si las configuras."));
 				GUILayout.FlexibleSpace();
 				sd.IsAuto = EditorGUILayout.Toggle(sd.IsAuto);
 				GUILayout.EndHorizontal();
@@ -62,32 +62,32 @@ namespace MoonAntonio
 				if (!sd.IsAuto)
 				{
 					EditorGUI.indentLevel++;
-					EditorGUILayout.PropertyField(lights, new GUIContent("Lights"), true);
+					EditorGUILayout.PropertyField(lights, new GUIContent("Luces"), true);
 					EditorGUI.indentLevel--;
 				}
 
 			};
-			GUInspectorEx.DrawCollapsible(bgRect, "PARAMETERS", ref ShowHideGeneral, generalCollapsibleVisible);
+			GUInspectorEx.DrawCollapsible(bgRect, "PARAMETROS", ref ShowHideGeneral, generalCollapsibleVisible);
 
 			//=======================================================================================================
-			//---------------------------------------------//OPTIONS GENERAL\\-------------------------------------------
+			//---------------------------------------------//OPCIONES GENERALES\\-------------------------------------------
 			GUInspectorEx.OnCollapsibleVisible targetsCollapsibleVisible = delegate ()
 			{
-				EditorGUILayout.PropertyField(shadowtargets, new GUIContent("Targets", "Transforms of GameObjects to detect on shadow"), true);
+				EditorGUILayout.PropertyField(shadowtargets, new GUIContent("Targets", "Transform de GameObjects para se detectadas en la sombra."), true);
 			};
-			GUInspectorEx.DrawCollapsible(bgRect, "TARGETS", ref ShowHideTargets, targetsCollapsibleVisible);
+			GUInspectorEx.DrawCollapsible(bgRect, "OBJETIVOS", ref ShowHideTargets, targetsCollapsibleVisible);
 
 			//=======================================================================================================
-			//---------------------------------------------//OPTIONS COMMON\\-------------------------------------------
+			//---------------------------------------------//OPCIONES COMUNES\\-------------------------------------------
 			GUInspectorEx.OnCollapsibleVisible commonCollapsibleVisible = delegate ()
 			{
-				EditorGUILayout.PropertyField(onChangeState, new GUIContent("On Change State", "Event call on change of state, enter or exit shadow"), true);
-				EditorGUILayout.PropertyField(onEnterShadow, new GUIContent("On Enter Shadow", "Event call if the GameObject enter in a shadow"), true);
-				EditorGUILayout.PropertyField(onExitShadow, new GUIContent("On Exit Shadow", "Event call if the GameObject exit a shadow"), true);
-				EditorGUILayout.PropertyField(onShadow, new GUIContent("On Shadow", "Event call if the GameObject is on a shadow and stay in"), true);
-				EditorGUILayout.PropertyField(outShadow, new GUIContent("Out Shadow", "Event call if the GameObject is out of a shadow and stay out"), true);
+				EditorGUILayout.PropertyField(onChangeState, new GUIContent("On Change State", "Evento llamado cuando se entra, sale o cambia de sombra."), true);
+				EditorGUILayout.PropertyField(onEnterShadow, new GUIContent("On Enter Shadow", "Evento llamado cuando el gameobject entra en la sombra."), true);
+				EditorGUILayout.PropertyField(onExitShadow, new GUIContent("On Exit Shadow", "Evento llamado cuando el gameobject sale de la sombra."), true);
+				EditorGUILayout.PropertyField(onShadow, new GUIContent("On Shadow", "Evento llamado cuando se esta dentro de la sombra."), true);
+				EditorGUILayout.PropertyField(outShadow, new GUIContent("Out Shadow", "Evento llamado cuano no se esta dentro de la sombra."), true);
 			};
-			GUInspectorEx.DrawCollapsible(bgRect, "COMMON EVENTS", ref ShowHideCommons, commonCollapsibleVisible);
+			GUInspectorEx.DrawCollapsible(bgRect, "EVENTOS COMUNES", ref ShowHideCommons, commonCollapsibleVisible);
 
 			//=======================================================================================================
 			//----------------------------------------------//UPDATE\\-----------------------------------------------

@@ -18,7 +18,7 @@ namespace MoonAntonio
 	{
 		#region Variables
 		public delegate void OnCollapsibleVisible();
-		private static string companyName = "MoonAntonio";
+		private static string nombre = "MoonAntonio";
 		private static Color backgroundColor = Color.black;
 		private static float logoSize = 64.0f;
 		#endregion
@@ -35,7 +35,7 @@ namespace MoonAntonio
 
 			GUI.DrawTexture(new Rect(rect.x, rect.y, logoSize, logoSize), logo, ScaleMode.ScaleToFit);
 
-			EditorGUI.LabelField(new Rect(rect.x + logoSize, rect.y, rect.width - logoSize, logoSize), companyName, headerStyle_project);
+			EditorGUI.LabelField(new Rect(rect.x + logoSize, rect.y, rect.width - logoSize, logoSize), nombre, headerStyle_project);
 			EditorGUI.LabelField(new Rect(rect.x + logoSize, rect.y, rect.width - logoSize, logoSize), name, headerStyle_title);
 
 			EditorGUILayout.Space();
